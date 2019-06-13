@@ -1,5 +1,8 @@
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.Map.Entry;
 
 /**
  * created by Yoga Agung created date 13/06/2019
@@ -9,39 +12,32 @@ import java.util.Random;
 
 class Solution {
     static char lookUp(char[] params) {
-        Arrays.sort(params);
+        Map<Character, Integer> map = new HashMap<>();
 
         int length = params.length;
-        int mostFrequentElement = 0;
-        int currentFrequentElement = 0;
 
-        char result = params[0];
+        for (int i = 0; i < length; i++) {
+            if (map.containsKey(params[i])) {
+                int currentFrequent = map.get(params[i]);
 
-        // System.out.println("Sorted Character : ");
-
-        for (int i = 1; i < length; i++) {
-            // System.out.print(params[i] + " ");
-
-            if (params[i] == params[i - 1]) {
-                currentFrequentElement++;
+                map.put(params[i], currentFrequent + 1);
             } else {
-                if (currentFrequentElement > mostFrequentElement) {
-                    mostFrequentElement = currentFrequentElement;
-
-                    result = params[i - 1];
-                }
-
-                currentFrequentElement = 1;
+                map.put(params[i], 1);
             }
         }
 
-        if (currentFrequentElement > mostFrequentElement) {
-            mostFrequentElement = currentFrequentElement;
+        int mostFrequent = Short.MIN_VALUE;
+        char result = params[0];
 
-            result = params[length - 1];
+        for (Entry<Character, Integer> entrySet : map.entrySet()) {
+            if (mostFrequent < entrySet.getValue()) {
+                result = entrySet.getKey();
+
+                mostFrequent = entrySet.getValue();
+            }
         }
 
-        //  System.out.println();
+        // System.out.println();
         System.out.println("Result : ");
 
         return result;
@@ -56,16 +52,16 @@ class Solution {
     public static void main(String[] args) {
         Random random = new Random();
 
-        char[] params = new char[10000000];
+        char[] params = new char[10000000]; // 10^7
 
         // System.out.println("Generated Character : ");
         for (int i = 0; i < params.length; i++) {
-            params[i] = randomChar(random);
+        params[i] = randomChar(random);
 
-            //  System.out.print(params[i] + " ");
+        // System.out.print(params[i] + " ");
         }
 
-        //  System.out.println();
+        // System.out.println();
         System.out.println(lookUp(params));
     }
 }
