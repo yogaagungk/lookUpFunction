@@ -12,21 +12,21 @@ class Solution {
         Arrays.sort(params);
 
         int length = params.length;
-        int mostFrequentEleme = 0;
+        int mostFrequentElement = 0;
         int currentFrequentElement = 0;
 
         char result = params[0];
 
-        System.out.println("Sorted Character : ");
+        // System.out.println("Sorted Character : ");
 
         for (int i = 1; i < length; i++) {
-            System.out.print(params[i] + " ");
+            // System.out.print(params[i] + " ");
 
             if (params[i] == params[i - 1]) {
                 currentFrequentElement++;
             } else {
-                if (currentFrequentElement > mostFrequentEleme) {
-                    mostFrequentEleme = currentFrequentElement;
+                if (currentFrequentElement > mostFrequentElement) {
+                    mostFrequentElement = currentFrequentElement;
 
                     result = params[i - 1];
                 }
@@ -35,13 +35,13 @@ class Solution {
             }
         }
 
-        if (currentFrequentElement > mostFrequentEleme) {
-            mostFrequentEleme = currentFrequentElement;
+        if (currentFrequentElement > mostFrequentElement) {
+            mostFrequentElement = currentFrequentElement;
 
             result = params[length - 1];
         }
 
-        System.out.println();
+        //  System.out.println();
         System.out.println("Result : ");
 
         return result;
@@ -58,14 +58,14 @@ class Solution {
 
         char[] params = new char[10000000];
 
-        System.out.println("Generated Character : ");
+        // System.out.println("Generated Character : ");
         for (int i = 0; i < params.length; i++) {
             params[i] = randomChar(random);
 
-            System.out.print(params[i] + " ");
+            //  System.out.print(params[i] + " ");
         }
 
-        System.out.println();
+        //  System.out.println();
         System.out.println(lookUp(params));
     }
 }
